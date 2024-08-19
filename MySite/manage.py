@@ -18,7 +18,8 @@ def main():
     execute_from_command_line(sys.argv)
 
 def update():
-    print(3)
+    print(5)
+
 
 if __name__ == '__main__':
     main()
