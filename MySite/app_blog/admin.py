@@ -29,7 +29,7 @@ class ArticleImageInline(admin.TabularInline):
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'pub_date', 'slug', 'main_page')
+    list_display = ('title', 'pub_date', 'slug', 'main_page', 'category')
     inlines = [ArticleImageInline]
     multiupload_form = True
     multiupload_list = False
@@ -37,7 +37,7 @@ class ArticleAdmin(admin.ModelAdmin):
     raw_id_fields = ('category',)
     fieldsets = (
         (None, {
-            'fields': ('pub_date', 'title', 'description', 'main_page'),
+            'fields': ('pub_date', 'title', 'description', 'main_page', 'category'),
         }),
         ('Додатково', {
             'classes': ('grp-collapse grp-closed',),

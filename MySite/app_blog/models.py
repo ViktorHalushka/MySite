@@ -27,8 +27,7 @@ class Article(models.Model):
     slug = models.SlugField('Слаг', unique_for_date='pub_date')
     main_page = models.BooleanField('Головна', default=False, help_text='Показувати на головній сторінці')
 
-    category = models.ForeignKey(Category, related_name='articles', blank=True, null=True, verbose_name='Категорія',
-                                 on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='articles', blank=True, null=True, verbose_name='Категорія', on_delete=models.CASCADE)
 
     objects = models.Manager()
 
