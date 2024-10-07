@@ -7,9 +7,12 @@ class Product(models.Model):
     title = models.CharField(max_length=256, blank=False, verbose_name="Product Title")
     price = models.IntegerField(blank=False, default=0, verbose_name="Product Price")
 
+
 class Category(models.Model):
     category = models.CharField('Категорія', max_length=250, help_text='Максимум 250 символів')
-    slug = models.SlugField('Слаг', default='')
+    slug = models.SlugField('Слаг', unique=True)
+
+    objects = models.Manager()
 
     class Meta:
         verbose_name = 'Категорія для публікації'
@@ -18,6 +21,12 @@ class Category(models.Model):
     def __str__(self):
         return self.category
 
+    def get_absolute_url(self):
+        try:
+            url = reverse('articles-category-list', kwargs={'slug': self.slug})
+        except Exception:
+            url = "/"
+        return url
 
 
 class Article(models.Model):
