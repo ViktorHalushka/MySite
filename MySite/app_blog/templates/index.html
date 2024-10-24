@@ -3,38 +3,76 @@
 <head>
     <title>Blog</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: black;
+        }
+
+        .btn-primary {
+            background-color: #2575fc;
+            border-color: #2575fc;
+        }
+    </style>
 </head>
 <body>
-    <h3>Категорії</h3>
-    {% if categories %}
-        {% for item in categories %}
-            <div>
-                <a href="{{ item.get_absolute_url }}">
-                    <h4>{{ item.category }}</h4>
-                </a>
-            </div>
-        {% endfor %}
-    {% endif %}
+<div class="container mt-5">
+        <!-- Categories Section -->
+        <h3 class="mb-4">Категорії</h3>
+        <div class="row">
+            {% if categories %}
+                {% for item in categories %}
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <a href="{{ item.get_absolute_url }}">
+                                    <h4 class="card-title">{{ item.category }}</h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
 
-    <h3>Останні публікації</h3>
+<!-- Latest Articles Section -->
+<h3 class="mb-4">Останні публікації</h3>
+<div class="row">
     {% if articles %}
-        {% for item in articles %}
-            <div>
+    {% for item in articles %}
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-body">
                 <a href="{{ item.get_absolute_url }}">
-                    <h4>{{ item.title }}</h4>
+                    <h4 class="card-title">{{ item.title }}</h4>
                 </a>
-                <h5>
+                <h5 class="card-subtitle mb-2 text-muted">
                     {{ item.pub_date|date:"j E Y"|safe|linebreaks }}
                 </h5>
-                <p>
+                <p class="card-text">
                     {{ item.description|safe|escape|striptags|truncatewords_html:32 }}
                 </p>
             </div>
-        {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
     {% endif %}
+</div>
 
-    <a href="{% url 'articleslist' %}">
-        <h4>Всі публікації</h4>
-    </a>
+<div class="text-center mt-4">
+    <a href="{% url 'articleslist' %}" class="btn btn-primary">Всі публікації</a>
+</div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

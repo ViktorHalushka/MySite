@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DateDetailView
 from .models import Article, Category
 
@@ -53,4 +52,5 @@ class ArticleList(ListView):
 class ArticleCategoryList(ArticleList):
     def get_queryset(self, *args, **kwargs):
         return Article.objects.filter(category__slug=self.kwargs.get('slug'))
+
 

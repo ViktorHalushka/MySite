@@ -2,7 +2,6 @@ from django.utils import timezone
 from django.db import models
 from django.urls import reverse
 
-
 class Product(models.Model):
     title = models.CharField(max_length=256, blank=False, verbose_name="Product Title")
     price = models.IntegerField(blank=False, default=0, verbose_name="Product Price")
